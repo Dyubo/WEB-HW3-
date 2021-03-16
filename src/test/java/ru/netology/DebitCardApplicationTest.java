@@ -18,8 +18,9 @@ public class DebitCardApplicationTest {
         $("[data-test-id=order-success]")
                 .shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
     }
-        @Test
-        void shouldRegisteredByNotValidName() {
+
+    @Test
+    void shouldRegisteredByNotValidName() {
         open("http://localhost:9999");
         $("[data-test-id=name] input").setValue("Eugen Mayer");
         $("[data-test-id=phone] input").setValue("+79129855670");
@@ -39,8 +40,9 @@ public class DebitCardApplicationTest {
         $("[data-test-id=name] span.input__sub")
                 .shouldHave(exactText("Поле обязательно для заполнения"));
     }
+
     @Test
-    void  shouldGetErrorMessageIfTelEmpty() {
+    void shouldGetErrorMessageIfTelEmpty() {
         open("http://localhost:9999");
         $("[data-test-id=name] input").setValue("Майер Юджин");
         $("[data-test-id=phone] input").setValue("");
@@ -49,8 +51,9 @@ public class DebitCardApplicationTest {
         $("[data-test-id=phone] span.input__sub")
                 .shouldHave(exactText("Поле обязательно для заполнения"));
     }
+
     @Test
-    void  shouldGetErrorMessageIfTelNotValid() {
+    void shouldGetErrorMessageIfTelNotValid() {
         open("http://localhost:9999");
         $("[data-test-id=name] input").setValue("Каменева Дарья");
         //TODO дабы посмотреть как будет работать код с валидным значением, решил сразу посмотреть оба варианта на буквы и цифры больше нужного.
@@ -61,15 +64,15 @@ public class DebitCardApplicationTest {
         $("[data-test-id=phone] span.input__sub")
                 .shouldHave(exactText("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
+
     @Test
-    void shouldBlankRegistrationForm(){
+    void shouldBlankRegistrationForm() {
         open("http://localhost:9999/");
-        $("[data-test-id=name] input").setValue("");
-        $("[data-test-id=phone] input").setValue("");
-        $("[data-test-id=agreement]").click();
+        $("[data-test-id=name] input").setValue("Каменева Дарья");
+        $("[data-test-id=phone] input").setValue("+79129855670");
         $(".button").click();
-        $("[data-test-id=name] span.input__sub")
-                .shouldHave(exactText("Поле обязательно для заполнения"));
+        $("[data-test-id=agreement].input_invalid .checkbox__text")
+                .shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй"));
 
 
     }
