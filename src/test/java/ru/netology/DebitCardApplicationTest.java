@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 
 public class DebitCardApplicationTest {
+    
     @Test
     void shouldRegisteredByAccount() {
         open("http://localhost:9999");
